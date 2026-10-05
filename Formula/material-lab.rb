@@ -2,9 +2,9 @@
 class MaterialLab < Formula
   desc "Turn a photograph into editable PBR texture maps, on your Mac"
   homepage "https://github.com/theisegoria/material-lab-cli"
-  url "https://github.com/theisegoria/material-lab-cli/releases/download/v1.0.0/material-lab-1.0.0-macos-arm64.tar.gz"
-  version "1.0.0"
-  sha256 "ce6caf8566522341d63fe074d5ce095bd5c89f8bf69616e9596787e298c5feb2"
+  url "https://github.com/theisegoria/material-lab-cli/releases/download/v1.0.1/material-lab-1.0.1-macos-arm64.tar.gz"
+  version "1.0.1"
+  sha256 "3cb7c4c0a166d2afe932bcf6d9b247a9fac4c97e2171faeeab9d7bbcf774f754"
 
   depends_on arch: :arm64
   depends_on :macos
@@ -20,5 +20,9 @@ class MaterialLab < Formula
 
   test do
     assert_match "material-lab #{version}", shell_output("#{bin}/material-lab --version")
+    # --learned must find the bundled model when run by bare name from PATH (the 1.0.0 bug).
+    with_env(PATH: "#{bin}:#{ENV["PATH"]}", HOME: testpath.to_s) do
+      assert_match "material-lab #{version}", shell_output("material-lab --learned --version")
+    end
   end
 end

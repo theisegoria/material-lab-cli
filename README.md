@@ -34,11 +34,11 @@ brew install material-lab
 Download `material-lab-<version>-macos-arm64.tar.gz` from [Releases](https://github.com/theisegoria/material-lab-cli/releases), check it against its `.sha256`, then:
 
 ```sh
-tar -xzf material-lab-1.0.0-macos-arm64.tar.gz
-sudo cp -R material-lab-1.0.0-macos-arm64/{bin,share} /usr/local/
+tar -xzf material-lab-1.0.1-macos-arm64.tar.gz
+sudo cp -R material-lab-1.0.1-macos-arm64/{bin,share} /usr/local/
 ```
 
-Keep `bin/material-lab` and `share/material-lab/` together so `--learned` finds the bundled model. The binary is signed with a Developer ID but not yet notarized. If you downloaded the archive with a browser, macOS may refuse to run it the first time; clear the quarantine flag with `xattr -dr com.apple.quarantine material-lab-1.0.0-macos-arm64`.
+Keep `bin/material-lab` and `share/material-lab/` together so `--learned` finds the bundled model. The binary is signed with a Developer ID but not yet notarized. If you downloaded the archive with a browser, macOS may refuse to run it the first time; clear the quarantine flag with `xattr -dr com.apple.quarantine material-lab-1.0.1-macos-arm64`.
 
 ## Quick start
 
