@@ -25,6 +25,7 @@ An Apple Silicon Mac running macOS 15 Sequoia or later.
 
 ```sh
 brew tap theisegoria/material-lab-cli https://github.com/theisegoria/material-lab-cli
+brew trust theisegoria/material-lab-cli    # Homebrew 7 asks you to trust third-party taps once
 brew install material-lab
 ```
 
