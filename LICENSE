@@ -1,0 +1,20 @@
+material-lab command-line tool — Licence
+
+Copyright (c) 2026 Benjamin Haire. All rights reserved.
+
+Permission is granted, free of charge, to any person who obtains a copy of the material-lab command-line
+tool (the "Software") to install and use it, for any purpose including commercial work, and to
+redistribute unmodified copies of the release archives published at
+https://github.com/theisegoria/material-lab-cli.
+
+You may not sell the Software, modify it, reverse engineer it except where applicable law permits, or
+distribute modified copies. Material you create with the Software is yours.
+
+Third-party components included with the Software (listed in THIRD_PARTY_NOTICES.md) are licensed under
+their own terms.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO
+EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
