@@ -9,7 +9,7 @@ Turn a photograph into an editable set of game-ready PBR texture maps, from the 
 - **Seamless tiling.** `--repair-albedo auto` rebuilds the photo so it repeats on both axes, cutting along the least visible seam instead of blurring the edges.
 - **39 material presets.** Start from a tuned recipe: brick, cobblestones, concrete, plaster, tile, wood planks, bark, soil, gravel, grass, denim, leather, brushed and rusted steel, copper, plastic and more (`--list-presets`).
 - **Bring your own maps.** Start from a hand-painted albedo (`--authored`) and drop in your own height, normal, roughness, AO or metalness maps; Material Lab fills in the rest and keeps everything consistent.
-- **Clean materials.** Remove uneven lighting (`--equalize`), physically based ambient occlusion, roughness that follows the surface's texture, and metalness only when you assign it.
+- **Clean materials.** Remove uneven lighting (`--equalize`), physically based ambient occlusion, roughness that follows the surface's texture rather than its paint colour, relief that still reads from a few metres away (seams, fasteners, chips and dents), and metalness only when you assign it.
 - **Export anywhere.** glTF, USDZ, MaterialX, Unreal, Unity (URP, Built-in and HDRP), Godot, Blender, Substance 3D, Roblox and Minecraft (LabPBR), with OpenGL or DirectX normals.
 - **Built for pipelines.** Catalog batches with `--jobs`, JSON reports, watch folders, recipe files, and recipes saved in the Material Lab Mac app.
 - **Inspect anything.** `--info`, `--contact-sheet` and `--diff` for any bundle.
@@ -36,11 +36,11 @@ brew install material-lab
 Download `material-lab-<version>-macos-arm64.tar.gz` from [Releases](https://github.com/theisegoria/material-lab-cli/releases), check it against its `.sha256`, then:
 
 ```sh
-tar -xzf material-lab-1.1.0-macos-arm64.tar.gz
-sudo cp -R material-lab-1.1.0-macos-arm64/{bin,share} /usr/local/
+tar -xzf material-lab-1.2.0-macos-arm64.tar.gz
+sudo cp -R material-lab-1.2.0-macos-arm64/{bin,share} /usr/local/
 ```
 
-Keep `bin/material-lab` and `share/material-lab/` together so `--learned` finds the bundled model. The binary is signed with a Developer ID but not yet notarized. If you downloaded the archive with a browser, macOS may refuse to run it the first time; clear the quarantine flag with `xattr -dr com.apple.quarantine material-lab-1.1.0-macos-arm64`.
+Keep `bin/material-lab` and `share/material-lab/` together so `--learned` finds the bundled model. The binary is signed with a Developer ID but not yet notarized. If you downloaded the archive with a browser, macOS may refuse to run it the first time; clear the quarantine flag with `xattr -dr com.apple.quarantine material-lab-1.2.0-macos-arm64`.
 
 ## Quick start
 

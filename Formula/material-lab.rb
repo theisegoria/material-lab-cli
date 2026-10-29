@@ -2,9 +2,9 @@
 class MaterialLab < Formula
   desc "Turn a photograph into editable PBR texture maps, on your Mac"
   homepage "https://github.com/theisegoria/material-lab-cli"
-  url "https://github.com/theisegoria/material-lab-cli/releases/download/v1.1.0/material-lab-1.1.0-macos-arm64.tar.gz"
-  version "1.1.0"
-  sha256 "1d336dde3dfe82baee598152c101d157ad96ef858771d36f96a6bfebd5d76563"
+  url "https://github.com/theisegoria/material-lab-cli/releases/download/v1.2.0/material-lab-1.2.0-macos-arm64.tar.gz"
+  version "1.2.0"
+  sha256 "581f3c87f5a3636c1a8f289a512530ecea1b0860549d99c45aaa93acff98ad57"
 
   depends_on arch: :arm64
   depends_on :macos
