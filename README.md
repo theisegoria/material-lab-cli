@@ -12,7 +12,8 @@ Turn a photograph into an editable set of game-ready PBR texture maps, from the 
 - **Clean materials.** Remove uneven lighting (`--equalize`), physically based ambient occlusion, roughness that follows the surface's texture rather than its paint colour, relief that still reads from a few metres away (seams, fasteners, chips and dents), and metalness only when you assign it.
 - **Export anywhere.** glTF, USDZ, MaterialX, Unreal, Unity (URP, Built-in and HDRP), Godot, Blender, Substance 3D, Roblox and Minecraft (LabPBR), with OpenGL or DirectX normals.
 - **Built for pipelines.** Catalog batches with `--jobs`, JSON reports, watch folders, recipe files, and recipes saved in the Material Lab Mac app.
-- **Inspect anything.** `--info`, `--contact-sheet` and `--diff` for any bundle.
+- **Inspect anything.** `--info`, `--contact-sheet`, `--diff` and a lit `--preview` render for any bundle.
+- **Works with Claude and other agents.** `material-lab mcp` is a Model Context Protocol server: an agent can derive, look at and export materials for you.
 - **Private.** No account and no network: everything happens on your Mac.
 
 Every derived map is an estimate made from one photograph; each bundle records exactly how it was made.
@@ -36,11 +37,11 @@ brew install material-lab
 Download `material-lab-<version>-macos-arm64.tar.gz` from [Releases](https://github.com/theisegoria/material-lab-cli/releases), check it against its `.sha256`, then:
 
 ```sh
-tar -xzf material-lab-1.2.0-macos-arm64.tar.gz
-sudo cp -R material-lab-1.2.0-macos-arm64/{bin,share} /usr/local/
+tar -xzf material-lab-1.3.0-macos-arm64.tar.gz
+sudo cp -R material-lab-1.3.0-macos-arm64/{bin,share} /usr/local/
 ```
 
-Keep `bin/material-lab` and `share/material-lab/` together so `--learned` finds the bundled model. The binary is signed with a Developer ID but not yet notarized. If you downloaded the archive with a browser, macOS may refuse to run it the first time; clear the quarantine flag with `xattr -dr com.apple.quarantine material-lab-1.2.0-macos-arm64`.
+Keep `bin/material-lab` and `share/material-lab/` together so `--learned` finds the bundled model. The binary is signed with a Developer ID but not yet notarized. If you downloaded the archive with a browser, macOS may refuse to run it the first time; clear the quarantine flag with `xattr -dr com.apple.quarantine material-lab-1.3.0-macos-arm64`.
 
 ## Quick start
 
@@ -52,6 +53,7 @@ material-lab --input wall.jpg --output wall --label "red brick" --preset red-bri
 # Look at the result:
 material-lab --info wall.pbrmaterial
 material-lab --contact-sheet wall.pbrmaterial --output wall-maps.png
+material-lab --preview wall.pbrmaterial --output wall-lit.png     # on a sphere, and tiled 2 x 2
 
 # A whole folder, two at a time, with a report:
 material-lab --catalog catalog.json --output materials --recipe slate.json --jobs 2 --report report.json
@@ -61,6 +63,38 @@ material-lab --watch ~/Inbox/textures --output ~/Materials --learned --also-expo
 ```
 
 `man material-lab` documents every option.
+
+## Use it from Claude (MCP)
+
+`material-lab mcp` runs a [Model Context Protocol](https://modelcontextprotocol.io) server on standard input and output.
+
+Claude Code:
+
+```sh
+claude mcp add material-lab -- material-lab mcp
+```
+
+Claude Desktop (`~/Library/Application Support/Claude/claude_desktop_config.json`):
+
+```json
+{
+  "mcpServers": {
+    "material-lab": { "command": "/opt/homebrew/bin/material-lab", "args": ["mcp"] }
+  }
+}
+```
+
+Then ask, for example: "Make a tileable material from ~/Pictures/wall.jpg, show me a lit preview, and export it for Unreal."
+
+| Tool | What it does |
+| --- | --- |
+| `list_presets`, `list_formats` | the 39 material presets and the 11 export formats |
+| `derive_material` | a photo (or a hand-made albedo and your own maps) to a `.pbrmaterial` bundle, with every recipe option |
+| `preview_material` | returns an image: every map on one sheet, or a lit render on a sphere and a 2 × 2 tiling |
+| `inspect_material`, `validate_material`, `diff_materials` | recipe, provenance and measures; strict validation; comparison |
+| `export_material` | any of the export formats |
+
+The server never overwrites anything: an output path that already exists is refused. By default it reads any image you name and writes only inside the client's workspace folders, your home folder or a temporary folder. To confine it further, start it with `material-lab mcp --root ~/Materials` (repeatable); then every path it reads or writes must be inside those folders.
 
 ## Output
 
